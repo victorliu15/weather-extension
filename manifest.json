@@ -1,0 +1,17 @@
+{
+    "name": "Weather Extension",
+    "description": "An extension that will allow you to freely view the weather wherever you are whenever you want with just a click of a single button",
+    "icons": {
+        "16": "assets/weathericon.png",
+        "32": "assets/weathericon.png",
+        "48": "assets/weathericon.png",
+        "128": "assets/weathericon.png"
+      },
+    "version": "0.1.0",
+    "manifest_version": 3,
+    "author": "Victor Liu",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Weather Extension"
+    }
+}
