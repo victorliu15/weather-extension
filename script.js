@@ -1,20 +1,36 @@
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('getWeather').addEventListener('click', async function() {
-    const coordinates = document.getElementById('coordinates').value;
-    if (coordinates) {
-      await fetchWeather(coordinates);
-    } else {
-      alert("Invalid coordinates");
-    }
-  });
+const apiKey = '1320e55314msh15777ff17238aeap16183djsn77c0b1fa331a';
+
+document.addEventListener("DOMContentLoaded", () => {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  } else {
+    displayError("Geolocation is not available in this browser.");
+  }
 });
-  
-async function fetchWeather(coordinates) {
-  const url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${coordinates}`;
+
+function successCallback(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+  fetchWeather(latitude, longitude);
+}
+
+function errorCallback(error) {
+  const resultDiv = document.getElementById("result");
+  if (error.code === error.PERMISSION_DENIED) {
+    resultDiv.textContent = "Geolocation permission denied. Please allow access in your browser settings.";
+    const instructionsDiv = document.getElementById("instructions");
+    instructionsDiv.textContent = "To enable geolocation access, go to your browser settings, find 'Site Settings' or 'Privacy and Security', and allow location access for this extension.";
+  } else {
+    resultDiv.textContent = "Error getting location: " + error.message;
+  }
+}
+
+async function fetchWeather(lat, lon) {
+  const url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${lat},${lon}`;
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': '1320e55314msh15777ff17238aeap16183djsn77c0b1fa331a',
+      'x-rapidapi-key': apiKey,
       'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com'
     }
   };
@@ -22,6 +38,7 @@ async function fetchWeather(coordinates) {
   try {
     const response = await fetch(url, options);
     const result = await response.json();
+    document.getElementById("temp").style.visibility = "hidden";
     displayWeatherInfo(result);
   } catch (error) {
     console.log(error);
@@ -48,7 +65,8 @@ function displayWeatherInfo(data) {
     if (hours > 12) {
       hours -= 12;
     }
-  } else if (hours === 0) {
+  } 
+  else if (hours == 0) {
     hours = 12;
   }
 
@@ -65,8 +83,10 @@ function displayWeatherInfo(data) {
   const body = document.body;
   if (current.is_day) {
     body.style.backgroundImage = `url('assets/dayImage.jpg')`;
+    body.style.color = "black";
   }
   else {
     body.style.backgroundImage = `url('assets/nightImage.jpg')`;
+    body.style.color = "white";
   }
 }
