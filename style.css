@@ -1,5 +1,13 @@
 body {
     height: 400px;
     width: 400px;
-    color: white;
+    background: no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.container {
+    text-align: center;
 }

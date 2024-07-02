@@ -8,11 +8,14 @@
 </head>
 <body>
   <div class="container">
-    <h1>Weather Information</h1>
-    <input type="text" id="coordinates" placeholder="Enter city coords">
-    <button id="getWeather">Get Weather</button>
-    <div id="weather-info"></div>
+    <div id="weather-info">
+      <img src="" id="weatherIcon" alt="weather icon">
+      <p id="currentWeather"></p>
+      <p id="currentTemperature"></p>
+    </div>
   </div>
+  <input type="text" id="coordinates" placeholder="Enter city coords">
+  <button id="getWeather">Get Weather</button>
   <script src="script.js"></script>
 </body>
 </html>
