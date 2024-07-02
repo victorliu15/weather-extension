@@ -32,21 +32,41 @@ function displayWeatherInfo(data) {
   const weatherIcon = document.getElementById("weatherIcon");
   const currentWeather = document.getElementById("currentWeather");
   const currentTemperature = document.getElementById("currentTemperature");
+  const currentInfo = document.getElementById("currentInfo");
+  const feelsLike = document.getElementById("feelsLike");
 
   const location = data.location;
   const current = data.current;
   const condition = current.condition;
+  const currentTime = location.localtime.slice(-5);
+  let hours = parseInt(currentTime.slice(0, 2));
+  const minutes = currentTime.slice(3);
+  let timeAbbreviation = "am";
+
+  if (hours >= 12) {
+    timeAbbreviation = "pm";
+    if (hours > 12) {
+      hours -= 12;
+    }
+  } else if (hours === 0) {
+    hours = 12;
+  }
+
+  const standardTime = `${hours}:${minutes} ${timeAbbreviation}`;
+
+  document.getElementById("weatherIcon").style.visibility = "visible";
 
   weatherIcon.src = `https:${condition.icon}`;
-  currentWeather.innerHTML = `The weather in ${location.name} at ${location.localtime} is currently ${condition.text}`;
-  currentTemperature.innerHTML = `The current temperature is ${current.temp_f} degrees Fahrenheit although it feels like ${current.feelslike_f} and it is ${current.is_day} daytime`;
+  weatherIcon.style.scale = "1.5";
+  currentInfo.innerHTML = `The weather in ${location.name} at ${standardTime}`
+  currentTemperature.innerHTML = `${current.temp_f}°F`;
+  currentWeather.innerHTML = `${condition.text}`;
+  feelsLike.innerHTML = `Feels like ${current.feelslike_f}°F`
   const body = document.body;
   if (current.is_day) {
-    body.style.backgroundImage = `url('assets/dayImage.png')`;
-    body.style.color = "black";
+    body.style.backgroundImage = `url('assets/dayImage.jpg')`;
   }
   else {
-    body.style.backgroundImage = `url('assets/nightImage.png')`;
-    body.style.color = "white";
+    body.style.backgroundImage = `url('assets/nightImage.jpg')`;
   }
 }

@@ -7,12 +7,16 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="header">
+    <h2 id="currentInfo"></h2>
+  </div>
   <div class="container">
-    <div id="weather-info">
-      <img src="" id="weatherIcon" alt="weather icon">
-      <p id="currentWeather"></p>
-      <p id="currentTemperature"></p>
+    <div class="weather-info">
+      <h1 id="currentTemperature"></h1>
+      <h2 id="currentWeather"></h2>
+      <h3 id="feelsLike"></h3>
     </div>
+    <img src="" id="weatherIcon" alt="weather icon">
   </div>
   <input type="text" id="coordinates" placeholder="Enter city coords">
   <button id="getWeather">Get Weather</button>
