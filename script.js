@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   } else {
-    displayError("Geolocation is not available in this browser.");
+    alert("Geolocation is not available in this browser.");
   }
 });
 
@@ -15,13 +15,12 @@ function successCallback(position) {
 }
 
 function errorCallback(error) {
-  const resultDiv = document.getElementById("result");
   if (error.code === error.PERMISSION_DENIED) {
-    resultDiv.textContent = "Geolocation permission denied. Please allow access in your browser settings.";
-    const instructionsDiv = document.getElementById("instructions");
-    instructionsDiv.textContent = "To enable geolocation access, go to your browser settings, find 'Site Settings' or 'Privacy and Security', and allow location access for this extension.";
-  } else {
-    resultDiv.textContent = "Error getting location: " + error.message;
+    document.getElementById("error").style.visibility = "visible";
+    document.getElementById("temp").style.visibility = "visible";
+  }
+  else {
+    alert("Error getting location: " + error.message);
   }
 }
 
@@ -39,9 +38,11 @@ async function fetchWeather(lat, lon) {
     const response = await fetch(url, options);
     const result = await response.json();
     document.getElementById("temp").style.visibility = "hidden";
+    document.getElementById("error").style.visibility = "hidden";
     displayWeatherInfo(result);
-  } catch (error) {
-    console.log(error);
+  } 
+  catch (error) {
+    alert(error);
   }
 }
   

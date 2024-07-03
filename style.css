@@ -6,6 +6,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    border-radius: 10%;
 }
 
 
@@ -24,7 +25,7 @@ body {
 }
 
 .header {
-    background-color: rgba(50, 50, 50, 0.5);
+    background-color: rgba(50, 50, 50, 0.8);
     width: 105%;
     transform: translateX(-2.5%);
     height: 24vh;
@@ -36,6 +37,10 @@ body {
 
 .h1 {
     font-weight: 600;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .temp {
@@ -53,4 +58,36 @@ body {
     color: white;
     left: 30%;
     top: 30%;
+}
+
+.error {
+    background-color: black;
+    width: 120%;
+    height: 120vh;
+    z-index: 20;
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+}
+
+#errorInfo {
+    color: white;
+    width: 350px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    position: absolute;
+    left: 7%;
+}
+
+#errorFix {
+    color: white;
+    width: 350px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    position: absolute;
+    top: 30%;
+    left: 7%;  
 }
